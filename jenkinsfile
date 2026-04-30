@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    environment {
+        STUDENT_NAME = "Muhammad Bilal"
+        ROLL_NO = "22F-3723"
+    }
+
+    stages {
+
+        stage('Build - Muhammad Bilal') {
+            steps {
+                echo "Building project for ${STUDENT_NAME} (${ROLL_NO})"
+                bat 'npm install'
+                bat 'npm run build'
+            }
+        }
+
+        stage('Test - Muhammad Bilal') {
+            steps {
+                echo "Testing project..."
+                bat 'npm run test'
+            }
+        }
+
+        stage('Deploy - Muhammad Bilal') {
+            when {
+                expression { currentBuild.currentResult == 'SUCCESS' }
+            }
+            steps {
+                echo "Deploying project..."
+                echo "Deployment successful for ${STUDENT_NAME}"
+            }
+        }
+    }
+}
