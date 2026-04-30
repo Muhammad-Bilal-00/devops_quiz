@@ -1,36 +1,36 @@
 pipeline {
     agent any
 
-    environment {
-        STUDENT_NAME = "Muhammad Bilal"
-        ROLL_NO = "22F-3723"
-    }
-
     stages {
-
-        stage('Build - Muhammad Bilal') {
+        stage('Muhammad Bilal - Build') {
             steps {
-                echo "Building project for ${STUDENT_NAME} (${ROLL_NO})"
-                bat 'npm install'
+                echo 'Starting Build Stage for Roll No: 22F-3723'
                 bat 'npm run build'
             }
         }
-
-        stage('Test - Muhammad Bilal') {
+        stage('Muhammad Bilal - Test') {
             steps {
-                echo "Testing project..."
+                echo 'Starting Test Stage for Roll No: 22F-3723'
                 bat 'npm run test'
             }
         }
-
-        stage('Deploy - Muhammad Bilal') {
+        stage('Muhammad Bilal - Deploy') {
             when {
-                expression { currentBuild.currentResult == 'SUCCESS' }
+                expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
             }
             steps {
-                echo "Deploying project..."
-                echo "Deployment successful for ${STUDENT_NAME}"
+                echo '========================================'
+                echo 'DEPLOY STAGE: Muhammad Bilal (22F-3723)'
+                echo '========================================'
+                echo 'Deploying application to Windows environment...'
+                echo '✅ Deployment Finished Successfully!'
             }
+        }
+    }
+    
+    post {
+        always {
+            echo 'Pipeline execution finished.'
         }
     }
 }
